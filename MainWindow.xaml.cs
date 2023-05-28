@@ -132,6 +132,12 @@ namespace FeatureHubPurple
                 {
                     UserName.Text = userName;
                     MessageBox.Show("Login successful");
+
+                    // Fetch the total time for today
+                    TimeSpan totalTime = await service.GetTotalTimeForToday();
+
+                    // Update the InfoCard with the total hours today
+                    TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
                 }
                 else
                 {
@@ -142,6 +148,15 @@ namespace FeatureHubPurple
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void refreshDashboardsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            var service = new CreatioService();
+            service.GetTotalTimeForToday();
+
         }
     }
 }

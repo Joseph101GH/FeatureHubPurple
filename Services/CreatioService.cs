@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -91,5 +92,30 @@ namespace FeatureHubPurple.Services
         {
             return $"{BaseUrl}{endpoint}";
         }
+
+        // New method for fetching total time for today
+        public async Task<TimeSpan> GetTotalTimeForToday()
+        {
+            string response = await _client.GetStringAsync(GetUrl("/0/odata/UsrETMTest"));
+            JObject jsonResponse = JObject.Parse(response);
+            JArray records = (JArray)jsonResponse["value"];
+
+            TimeSpan totalTime = new TimeSpan(0);
+            string format = "MM/dd/yyyy HH:mm:ss";
+            foreach (JObject record in records)
+            {
+                DateTime start = DateTime.ParseExact((string)record["UsrStart"], format, CultureInfo.InvariantCulture);
+                DateTime end = DateTime.ParseExact((string)record["UsrEnd"], format, CultureInfo.InvariantCulture);
+                DateTime day = DateTime.ParseExact((string)record["UsrDay"], format, CultureInfo.InvariantCulture);
+
+                if (day.Date == DateTime.Today)
+                {
+                    totalTime += end - start;
+                }
+            }
+
+            return totalTime;
+        }
+
     }
 }
