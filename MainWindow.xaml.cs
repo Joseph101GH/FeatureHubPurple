@@ -1,12 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using FeatureHubPurple.Services;
 using FeatureHubPurple.UserControls;
 
 namespace FeatureHubPurple
 {
     public partial class MainWindow : Window
     {
+        
         public static MainWindow Instance
         {
             get; private set;
@@ -14,10 +16,11 @@ namespace FeatureHubPurple
 
         public MainWindow()
         {
+           
             InitializeComponent();
             Instance = this;
         }
- 
+
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -119,5 +122,9 @@ namespace FeatureHubPurple
 
         }
 
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

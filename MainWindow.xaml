@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:FeatureHubPurple"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:uc="clr-namespace:FeatureHubPurple.UserControls"
-        mc:Ignorable="d"
-        Title="MainWindow" 
+        
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent"
-        Height="740" Width="1280">
+        Background="Transparent" mc:Ignorable="d" Height="740" Width="1280">
     <Grid Name="all" Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -99,10 +97,16 @@
                         </Button>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom">
-                        <Button x:Name="LogoutButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom">
+                        <Button x:Name="LogoutButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" Visibility="Hidden" >
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Logout" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="LoginButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" Click="LoginButton_Click" >
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Login" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -144,7 +148,14 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Border Name="mainContentBorder" CornerRadius="20" Padding="35 25" Background="#022b3a" Margin="25 0 25 40">
-                            <Grid Background="Transparent"  Name="MainContent"></Grid>
+                            <Grid Background="Transparent"  Name="MainContent">
+                                <!--Info Cards-->
+                                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="50 20 15 40" >
+                                    <uc:InfoCard Grid.Column="0" Title="Total Hours Today" Number="654,947" Icon="Clock" Background1="#827BFF" Background2="#D9B5FF" EllipseBackground1="#B298FD" EllipseBackground2="#E4BBFF"/>
+                                    <uc:InfoCard Grid.Column="1" Title="Total Hours This Week" Number="192,320" Icon="Clock" Background1="#FD8A87" Background2="#F3AB92" EllipseBackground1="#FBD5A8" EllipseBackground2="#FDB89B"/>
+                                    <uc:InfoCard Grid.Column="2" Title="Total Hours This Month" Number="$14,528" Icon="Clock" Background1="#FC84CB" Background2="#FC8FAE" EllipseBackground1="#FC8FAE" EllipseBackground2="#FFABE6"/>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                     </Grid>
                 </Grid>
