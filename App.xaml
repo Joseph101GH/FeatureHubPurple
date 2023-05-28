@@ -6,7 +6,7 @@
     <Application.Resources>
         <Style x:Key="menuButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#707DB2" />
+            <Setter Property="Foreground" Value="#FF869CB1" />
             <Setter Property="Tag" Value="#6673B7" />
             <Setter Property="Margin" Value="0 0 0 5" />
             <Setter Property="Height" Value="45" />
@@ -44,6 +44,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--active menu-->
         <Style x:Key="menuButtonActive" TargetType="Button">
             <Setter Property="Background" >
                 <Setter.Value>
@@ -53,7 +54,7 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Foreground" Value="#BCCAF1" />
+            <Setter Property="Foreground" Value="#e3f8ff" />
             <Setter Property="Tag" Value="#7071F0" />
             <Setter Property="Margin" Value="0 0 0 5" />
             <Setter Property="Height" Value="45" />
@@ -80,6 +81,29 @@
             <Setter Property="Height" Value="23" />
             <Setter Property="Margin" Value="0" />
         </Style>
+        <Style x:Key="menuButtonIconTitleWindow" TargetType="fa:IconImage">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+            <Setter Property="Width" Value="23" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Opacity" Value="0.7"/>
+        </Style>
+            <Style x:Key="windowButton" TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         <Style x:Key="menuButtonText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
             <Setter Property="FontSize" Value="13" />

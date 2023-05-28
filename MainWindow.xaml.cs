@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using FeatureHubPurple.UserControls;
 
@@ -38,10 +39,13 @@ namespace FeatureHubPurple
             this.Close();
         }
 
-        private void Feature1Button_Click(object sender, RoutedEventArgs e)
+        private void GuidCheckerButton_Click(object sender, RoutedEventArgs e)
         {
-            SetTitleContent();
+            SetActiveButton(GuidCheckerButton);
+
             LoadFeature1();
+            SetTitleContent();
+
         }
 
         private void Feature2Button_Click(object sender, RoutedEventArgs e)
@@ -60,6 +64,18 @@ namespace FeatureHubPurple
             MainContent.Children.Clear();
             MainContent.Children.Add(content);
         }
+
+        private void SetActiveButton(Button activeButton)
+        {
+            // Reset all button styles to "menuButton"
+            DashboardButton.Style = (Style)FindResource("menuButton");
+            GuidCheckerButton.Style = (Style)FindResource("menuButton");
+            // Add more buttons here if you have them...
+
+            // Set the clicked button's style to "menuButtonActive"
+            activeButton.Style = (Style)FindResource("menuButtonActive");
+        }
+
 
         private void SetTitleContent()
         {
@@ -94,5 +110,14 @@ namespace FeatureHubPurple
         {
 
         }
+
+        private void DashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the content of the MainContent Grid
+            MainContent.Children.Clear();
+            SetActiveButton(DashboardButton);
+
+        }
+
     }
 }

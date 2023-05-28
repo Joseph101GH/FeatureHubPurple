@@ -32,19 +32,19 @@ namespace FeatureHubPurple.UserControls
             if (IsGuid(InputTextBox.Text))
             {
                 //CORRECT
-              MainWindow.Instance.mainContentBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#059547"));
+              MainWindow.Instance.mainContentBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4caf50"));
             }
             else
             {
                 //WRONG
-                MainWindow.Instance.mainContentBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e0443c"));
+                MainWindow.Instance.mainContentBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f44336"));
             }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             InputTextBox.Clear();
-            this.Background = Brushes.Transparent;
+            MainWindow.Instance.mainContentBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#243771"));
         }
 
         private void CopyClipboard_Click(object sender, RoutedEventArgs e)
