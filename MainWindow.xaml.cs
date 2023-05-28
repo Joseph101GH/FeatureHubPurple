@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FeatureHubPurple.Services;
@@ -8,7 +9,7 @@ namespace FeatureHubPurple
 {
     public partial class MainWindow : Window
     {
-        
+
         public static MainWindow Instance
         {
             get; private set;
@@ -16,7 +17,7 @@ namespace FeatureHubPurple
 
         public MainWindow()
         {
-           
+
             InitializeComponent();
             Instance = this;
         }
@@ -121,10 +122,26 @@ namespace FeatureHubPurple
             SetActiveButton(DashboardButton);
 
         }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var service = new CreatioService();
+            try
+            {
+                var userName = await service.TryLoginAsync();
+                if (!string.IsNullOrEmpty(userName))
+                {
+                    UserName.Text = userName;
+                    MessageBox.Show("Login successful");
+                }
+                else
+                {
+                    MessageBox.Show("Unable to retrieve user information");
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

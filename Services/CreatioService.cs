@@ -1,67 +1,95 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace FeatureHubPurple.Services
 {
     public class CreatioService
     {
-        private const string AuthServiceUrl = "https://080925-studio.creatio.com/ServiceModel/AuthService.svc/Login";
-        private const string ODataUrl = "https://080925-studio.creatio.com/0/odata";
+        private const string BaseUrl = "https://080925-studio.creatio.com";
+        private const string AuthServiceUrl = "/ServiceModel/AuthService.svc/Login";
         private const string UserName = "APIT";
         private const string UserPassword = "Creatio123";
 
-        private CookieContainer _authCookie;
+        private HttpClient _client;
 
-        public void TryLogin()
+        public CreatioService()
         {
-            var authData = @"{
-                ""UserName"":""" + UserName + @""",
-                ""UserPassword"":""" + UserPassword + @"""
-            }";
-            var request = CreateRequest(AuthServiceUrl, authData);
-            _authCookie = new CookieContainer();
-            request.CookieContainer = _authCookie;
-
-            using (var response = (HttpWebResponse)request.GetResponse())
-            {
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    using (var reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        var responseMessage = reader.ReadToEnd();
-                        Console.WriteLine(responseMessage);
-                        if (responseMessage.Contains("\"Code\":1"))
-                        {
-                            throw new UnauthorizedAccessException($"Unauthorized {UserName} for {AuthServiceUrl}");
-                        }
-                    }
-                    string authName = ".ASPXAUTH";
-                    string authCookeValue = response.Cookies[authName].Value;
-                    _authCookie.Add(new Uri(AuthServiceUrl), new Cookie(authName, authCookeValue));
-                }
-            }
+            _client = new HttpClient();
+            _client.DefaultRequestHeaders.Add("ForceUseSession", "true");
         }
 
-        private HttpWebRequest CreateRequest(string url, string data)
+        public async Task<string> TryLoginAsync()
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "POST";
-            request.ContentType = "application/json; charset=utf-8";
-            request.Headers.Add("ForceUseSession", "true");
-            var bytes = Encoding.UTF8.GetBytes(data);
-            request.ContentLength = bytes.Length;
-
-            using (var requestStream = request.GetRequestStream())
+            var authData = new JObject
             {
-                requestStream.Write(bytes, 0, bytes.Length);
+                {"UserName", UserName},
+                {"UserPassword", UserPassword}
+            };
+
+            var content = new StringContent(authData.ToString(), Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync(GetUrl(AuthServiceUrl), content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseJson = JObject.Parse(await response.Content.ReadAsStringAsync());
+
+                if (responseJson["Code"]?.Value<int>() != 0)
+                {
+                    throw new UnauthorizedAccessException($"Unauthorized {UserName} for {AuthServiceUrl}");
+                }
+
+                // Extract the CSRF token from the response headers
+                if (TryGetCsrfToken(response.Headers, out var csrfToken))
+                {
+                    // Add CSRF token as a header for subsequent requests
+                    _client.DefaultRequestHeaders.Add("BPMCSRF", csrfToken);
+                }
+                else
+                {
+                    throw new InvalidOperationException("CSRF token not found in the response headers.");
+                }
+
+                // Fetch user information
+                var userInfoUrl = "/0/ServiceModel/UserInfoService.svc/getCurrentUserInfo";
+                var userInfoRequest = new HttpRequestMessage(HttpMethod.Post, GetUrl(userInfoUrl));
+                userInfoRequest.Headers.Add("BPMCSRF", csrfToken); // Add CSRF token as a header
+
+                var userInfoResponse = await _client.SendAsync(userInfoRequest);
+                var userInfoContent = await userInfoResponse.Content.ReadAsStringAsync();
+
+                // Parse the user info JSON response
+                var userInfoJson = JObject.Parse(userInfoContent);
+                var userName = userInfoJson["userInfo"]["contactName"].ToString();
+
+                return userName;
             }
-            return request;
+
+            return null;
+        }
+
+        private bool TryGetCsrfToken(HttpResponseHeaders headers, out string csrfToken)
+        {
+            csrfToken = null;
+            if (headers.TryGetValues("Set-Cookie", out var cookieValues))
+            {
+                var csrfCookie = cookieValues.FirstOrDefault(cookie => cookie.StartsWith("BPMCSRF="));
+                if (!string.IsNullOrEmpty(csrfCookie))
+                {
+                    csrfToken = csrfCookie.Split(';')[0].Trim().Replace("BPMCSRF=", "");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string GetUrl(string endpoint)
+        {
+            return $"{BaseUrl}{endpoint}";
         }
     }
 }
