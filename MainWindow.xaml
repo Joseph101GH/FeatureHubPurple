@@ -148,7 +148,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Border Name="mainContentBorder" CornerRadius="20" Background="#022b3a" Margin="25 0 25 40">
-                            <Grid Background="Transparent" Name="MainContent">
+                            <StackPanel Name="MainContent">
+                            <Grid Background="Transparent" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="60"/>
                                     <RowDefinition/>
@@ -157,12 +158,13 @@
                                     <fa:IconImage  Icon="Refresh" Foreground="White" />
                                 </Button>
                                 <!--Info Cards-->
-                                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="25 25 0 0">
+                                <StackPanel x:Name="smallDashboardPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="25 25 0 0">
                                     <uc:InfoCard Grid.Column="0" Number="0h" Icon="Clock" Background1="#827BFF" Background2="#D9B5FF" EllipseBackground1="#B298FD" EllipseBackground2="#E4BBFF" Title="Total Hours Today" x:Name="TotalHoursTodayCard"/>
                                     <uc:InfoCard Grid.Column="1" Number="0h" Icon="Clock" Background1="#FD8A87" Background2="#F3AB92" EllipseBackground1="#FBD5A8" EllipseBackground2="#FDB89B" Title="Total Hours This Week" />
                                     <uc:InfoCard Grid.Column="2" Number="0h" Icon="Clock" Background1="#FC84CB" Background2="#FC8FAE" EllipseBackground1="#FC8FAE" EllipseBackground2="#FFABE6" Title="Total Hours This Month"/>
                                 </StackPanel>
                             </Grid>
+                            </StackPanel>
                         </Border>
                     </Grid>
                 </Grid>

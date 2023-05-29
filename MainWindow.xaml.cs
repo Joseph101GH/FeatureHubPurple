@@ -77,6 +77,7 @@ namespace FeatureHubPurple
         {
             MainContent.Children.Clear();
             MainContent.Children.Add(featureControl);
+            MainContent.VerticalAlignment = VerticalAlignment.Center;
         }
 
         // Method to set the active button style
@@ -109,6 +110,8 @@ namespace FeatureHubPurple
             MainContent.Children.Clear();
             if (_originalMainContent != null)
             {
+                // Remove vertical alignment
+                MainContent.VerticalAlignment = VerticalAlignment.Top;
                 MainContent.Children.Add(_originalMainContent);
             }
         }
