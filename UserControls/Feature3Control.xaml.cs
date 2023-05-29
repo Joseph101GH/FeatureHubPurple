@@ -78,8 +78,8 @@ namespace FeatureHubPurple.UserControls
             {
                 Description = DescriptionTextBox.Text,
                 StartTime = DateTime.Now.ToString("HH:mm"),
-                EndTime = "02:00",
-                Duration = "00:00",
+                EndTime = "00:00",
+                Duration = "00:15",
                 IsActive = true // Add this line to set IsActive to true when a new timer is started
             };
             _timerItems.Add(newItem);
