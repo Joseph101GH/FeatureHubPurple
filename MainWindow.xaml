@@ -72,7 +72,7 @@
                                     <TextBlock Text="Work Timers" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="HourConverterButton" Style="{StaticResource menuButton}">
+                            <Button x:Name="HourConverterButton" Style="{StaticResource menuButton}" Click="HourConverterButton_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="ChartArea" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Hour Converter" Style="{StaticResource menuButtonText}"/>

@@ -125,7 +125,15 @@ namespace FeatureHubPurple
             SetTitleContent("WorkTimers");
         }
 
+        private void HourConverterButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveButton(HourConverterButton);
+            LoadFeatureControl(new Feature4Control());
+            SetTitleContent("Hours converter");
+        }
         #endregion
+
+
         // Method to restore the original content of MainContent
         private void RestoreMainContent()
         {
@@ -172,7 +180,6 @@ namespace FeatureHubPurple
             TimeSpan totalTime = await _creatioService.GetTotalTimeForToday();
             TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
         }
-
 
     }
 }

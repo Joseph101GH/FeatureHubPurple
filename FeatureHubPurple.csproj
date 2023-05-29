@@ -121,6 +121,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\InverseBooleanConverter.cs" />
+    <Compile Include="Models\TimeEntry.cs" />
     <Compile Include="Models\TimerItem.cs" />
     <Compile Include="Models\TimeZoneInfoModel.cs" />
     <Compile Include="Services\CreatioService.cs" />
@@ -133,6 +134,9 @@
     </Compile>
     <Compile Include="UserControls\Feature3Control.xaml.cs">
       <DependentUpon>Feature3Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Feature4Control.xaml.cs">
+      <DependentUpon>Feature4Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\InfoCard.xaml.cs">
       <DependentUpon>InfoCard.xaml</DependentUpon>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Feature3Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Feature4Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
