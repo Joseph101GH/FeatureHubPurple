@@ -5,8 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FeatureHubPurple.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+          Background="#fdfcfa">
     <Grid>
-            
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/BigClock.jpg" Opacity="0.2"/>
+        </Grid.Background>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock x:Name="TimeDisplay" FontSize="68" FontWeight="Bold" Margin="10" TextAlignment="Center" Foreground="#242931"/>
+            <ComboBox x:Name="TimeZoneComboBox" Margin="10" SelectionChanged="TimeZoneComboBox_SelectionChanged" Background="#1d6d80" Foreground="#242931" FontSize="48" SelectedIndex="0">
+                <ComboBoxItem Content="Brussels"/>
+                <ComboBoxItem Content="UTC"/>
+                <ComboBoxItem Content="CEST"/>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </UserControl>
