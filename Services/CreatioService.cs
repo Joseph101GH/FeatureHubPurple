@@ -9,14 +9,16 @@ using Newtonsoft.Json.Linq;
 
 namespace FeatureHubPurple.Services
 {
+
     public class CreatioService
     {
         private const string BaseUrl = "https://080925-studio.creatio.com";
         private const string AuthServiceUrl = "/ServiceModel/AuthService.svc/Login";
         private const string UserName = "APIT";
         private const string UserPassword = "Creatio123";
-
         private HttpClient _client;
+        private string _csrfToken;  // New field for CSRF token
+
 
         public CreatioService()
         {
@@ -44,11 +46,12 @@ namespace FeatureHubPurple.Services
                     throw new UnauthorizedAccessException($"Unauthorized {UserName} for {AuthServiceUrl}");
                 }
 
-                // Extract the CSRF token from the response headers
+                // Save CSRF token
                 if (TryGetCsrfToken(response.Headers, out var csrfToken))
                 {
                     // Add CSRF token as a header for subsequent requests
-                    _client.DefaultRequestHeaders.Add("BPMCSRF", csrfToken);
+                    _csrfToken = csrfToken;
+                    _client.DefaultRequestHeaders.Add("BPMCSRF", _csrfToken);
                 }
                 else
                 {
@@ -93,9 +96,13 @@ namespace FeatureHubPurple.Services
             return $"{BaseUrl}{endpoint}";
         }
 
-        // New method for fetching total time for today
         public async Task<TimeSpan> GetTotalTimeForToday()
         {
+            if (!_client.DefaultRequestHeaders.Contains("BPMCSRF") && _csrfToken != null)
+            {
+                _client.DefaultRequestHeaders.Add("BPMCSRF", _csrfToken);
+            }
+
             string response = await _client.GetStringAsync(GetUrl("/0/odata/UsrETMTest"));
             JObject jsonResponse = JObject.Parse(response);
             JArray records = (JArray)jsonResponse["value"];

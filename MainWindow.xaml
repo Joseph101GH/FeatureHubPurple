@@ -150,10 +150,10 @@
                         <Border Name="mainContentBorder" CornerRadius="20" Background="#022b3a" Margin="25 0 25 40">
                             <Grid Background="Transparent" Name="MainContent">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="60"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Button Margin="20 0 20 0" Grid.Row="0" HorizontalAlignment="Right" x:Name="refreshDashboardsButton" Height="50" Width="50" Background="Transparent" BorderBrush="Transparent" Click="refreshDashboardsButton_Click">
+                                <Button Margin="0 10 20 0" Grid.Row="0" HorizontalAlignment="Right" x:Name="refreshDashboardsButton" Height="50" Width="50" Background="Transparent" BorderBrush="Transparent" Click="refreshDashboardsButton_Click">
                                     <fa:IconImage  Icon="Refresh" Foreground="White" />
                                 </Button>
                                 <!--Info Cards-->

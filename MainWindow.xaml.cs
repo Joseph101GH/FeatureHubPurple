@@ -9,25 +9,36 @@ namespace FeatureHubPurple
 {
     public partial class MainWindow : Window
     {
-
+        // Singleton instance of MainWindow
         public static MainWindow Instance
         {
             get; private set;
         }
 
+        // Original content of the MainContent control
+        private UIElement _originalMainContent;
+        private CreatioService _creatioService;
+
         public MainWindow()
         {
-
             InitializeComponent();
             Instance = this;
+            _creatioService = new CreatioService();
+
+            // Save the original content of MainContent
+            _originalMainContent = MainContent.Children.Count > 0 ? MainContent.Children[0] : null;
         }
 
+        // Handle mouse events for moving the window
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 this.DragMove();
+            }
         }
 
+        // Button click event handlers
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -43,100 +54,80 @@ namespace FeatureHubPurple
             this.Close();
         }
 
+        // Button click handlers for loading different features
         private void GuidCheckerButton_Click(object sender, RoutedEventArgs e)
         {
             SetActiveButton(GuidCheckerButton);
-
-            LoadFeature1();
-            SetTitleContent();
-
+            LoadFeatureControl(new Feature1Control());
+            SetTitleContent("GUID-Checker");
         }
 
         private void Feature2Button_Click(object sender, RoutedEventArgs e)
         {
-            LoadFeature2();
+            LoadFeatureControl(new Feature2Control());
         }
 
         private void Feature3Button_Click(object sender, RoutedEventArgs e)
         {
-            LoadFeature3();
+            LoadFeatureControl(new Feature3Control());
         }
 
-        private void LoadFeature1()
+        // Method to load a UserControl into the MainContent control
+        private void LoadFeatureControl(UserControl featureControl)
         {
-            var content = new Feature1Control();
             MainContent.Children.Clear();
-            MainContent.Children.Add(content);
+            MainContent.Children.Add(featureControl);
         }
 
+        // Method to set the active button style
         private void SetActiveButton(Button activeButton)
         {
             // Reset all button styles to "menuButton"
             DashboardButton.Style = (Style)FindResource("menuButton");
             GuidCheckerButton.Style = (Style)FindResource("menuButton");
-            // Add more buttons here if you have them...
 
             // Set the clicked button's style to "menuButtonActive"
             activeButton.Style = (Style)FindResource("menuButtonActive");
         }
 
-
-        private void SetTitleContent()
+        // Method to set the title content
+        private void SetTitleContent(string title)
         {
-            pageTitle.Text = "GUID-Checker";
+            pageTitle.Text = title;
         }
 
-        private void LoadFeature2()
-        {
-            var content = new Feature2Control();
-            MainContent.Children.Clear();
-            MainContent.Children.Add(content);
-        }
-
-        private void LoadFeature3()
-        {
-            var content = new Feature3Control();
-            MainContent.Children.Clear();
-            MainContent.Children.Add(content);
-        }
-
-        private void Feature4Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Feature5Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void HistoryButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        // Button click handler for returning to the Dashboard
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
-            // Clear the content of the MainContent Grid
-            MainContent.Children.Clear();
+            RestoreMainContent();
             SetActiveButton(DashboardButton);
-
         }
+
+        // Method to restore the original content of MainContent
+        private void RestoreMainContent()
+        {
+            MainContent.Children.Clear();
+            if (_originalMainContent != null)
+            {
+                MainContent.Children.Add(_originalMainContent);
+            }
+        }
+
+        // Login button click handler
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var service = new CreatioService();
             try
             {
-                var userName = await service.TryLoginAsync();
+                var userName = await _creatioService.TryLoginAsync();
                 if (!string.IsNullOrEmpty(userName))
                 {
                     UserName.Text = userName;
                     MessageBox.Show("Login successful");
 
                     // Fetch the total time for today
-                    TimeSpan totalTime = await service.GetTotalTimeForToday();
+                    TimeSpan totalTime = await _creatioService.GetTotalTimeForToday();
 
-                    // Update the InfoCard with the total hours today
+                    // Updatethe InfoCard with the total hours today
                     TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
                 }
                 else
@@ -150,13 +141,11 @@ namespace FeatureHubPurple
             }
         }
 
-        private void refreshDashboardsButton_Click(object sender, RoutedEventArgs e)
+        // Refresh button click handler
+        private async void refreshDashboardsButton_Click(object sender, RoutedEventArgs e)
         {
-
-
-            var service = new CreatioService();
-            service.GetTotalTimeForToday();
-
+            TimeSpan totalTime = await _creatioService.GetTotalTimeForToday();
+            TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
         }
     }
 }
