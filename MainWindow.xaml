@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:FeatureHubPurple"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:uc="clr-namespace:FeatureHubPurple.UserControls"
-        mc:Ignorable="d"
-        Title="MainWindow" 
+        
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent"
-        Height="740" Width="1280">
+        Background="Transparent" mc:Ignorable="d" Height="740" Width="1280">
     <Grid Name="all" Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -43,7 +41,7 @@
                                 <TextBlock Text="JP" Foreground="#ffffff" FontSize="22" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center" Margin="3 0 0 2"/>
                             </Border>
                             <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                                <TextBlock Text="User A." FontSize="15" Margin="0 0 0 5" Foreground="#C2CFFF"/>
+                                <TextBlock Name="UserName" Text="User A." FontSize="15" Margin="0 0 0 5" Foreground="#C2CFFF"/>
                                 <TextBlock Text="Beta 3.0" Foreground="#7788bf" FontSize="11"/>
                             </StackPanel>
                         </StackPanel>
@@ -99,10 +97,16 @@
                         </Button>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom">
-                        <Button x:Name="LogoutButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom">
+                        <Button x:Name="LogoutButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" Visibility="Hidden" >
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Logout" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="LoginButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" Click="LoginButton_Click" >
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Login" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -143,8 +147,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="mainContentBorder" CornerRadius="20" Padding="35 25" Background="#022b3a" Margin="25 0 25 40">
-                            <Grid Background="Transparent"  Name="MainContent"></Grid>
+                        <Border Name="mainContentBorder" CornerRadius="20" Background="#022b3a" Margin="25 0 25 40">
+                            <StackPanel Name="MainContent">
+                            <Grid Background="Transparent" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Button Margin="0 10 20 0" Grid.Row="0" HorizontalAlignment="Right" x:Name="refreshDashboardsButton" Height="50" Width="50" Background="Transparent" BorderBrush="Transparent" Click="refreshDashboardsButton_Click">
+                                    <fa:IconImage  Icon="Refresh" Foreground="White" />
+                                </Button>
+                                <!--Info Cards-->
+                                <StackPanel x:Name="smallDashboardPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="25 25 0 0">
+                                    <uc:InfoCard Grid.Column="0" Number="0h" Icon="Clock" Background1="#827BFF" Background2="#D9B5FF" EllipseBackground1="#B298FD" EllipseBackground2="#E4BBFF" Title="Total Hours Today" x:Name="TotalHoursTodayCard"/>
+                                    <uc:InfoCard Grid.Column="1" Number="0h" Icon="Clock" Background1="#FD8A87" Background2="#F3AB92" EllipseBackground1="#FBD5A8" EllipseBackground2="#FDB89B" Title="Total Hours This Week" />
+                                    <uc:InfoCard Grid.Column="2" Number="0h" Icon="Clock" Background1="#FC84CB" Background2="#FC8FAE" EllipseBackground1="#FC8FAE" EllipseBackground2="#FFABE6" Title="Total Hours This Month"/>
+                                </StackPanel>
+                            </Grid>
+                            </StackPanel>
                         </Border>
                     </Grid>
                 </Grid>

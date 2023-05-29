@@ -7,27 +7,33 @@
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              Background="Transparent">
-    <Border Background="Transparent" CornerRadius="20" Name="feature1Border">
-    <Grid Background="Transparent">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <TextBox Margin="50 0 50 10" Name="explanationBlock" IsReadOnly="True" Background="Transparent" BorderThickness="0"  Style="{StaticResource titleTextBox}" TextWrapping="Wrap" xml:space="preserve">
+        <Grid>
+            <!-- Define rows in your Grid layout -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Assign the first StackPanel to the first row -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" >
+                <TextBox Margin="50 0 50 10" Name="explanationBlock" IsReadOnly="True" Background="Transparent" BorderThickness="0" 
+                         Style="{StaticResource titleTextBox}" TextWrapping="Wrap" xml:space="preserve">
                 Please type a GUID. The background will change accordingly.
                 Here is an example to try: 6B29FC40-CA47-1067-B31D-00DD010662DA</TextBox>
-            <Button Style="{StaticResource guidButton}" Click="guidExample_Click">Example</Button>
-        </StackPanel>
-        <StackPanel VerticalAlignment="Center" Margin="50">
-            <TextBox  x:Name="InputTextBox"  TextChanged="InputTextBox_TextChanged"  Margin="5" Padding="5">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CopyClipboard" Content="Clipboard" Margin="10" Background="#6A6AE4" Style="{StaticResource guidButton}" Click="CopyClipboard_Click"/>
-                <Button x:Name="ClearButton" Content="Clear" Margin="10" Click="ClearButton_Click" Background="#6A6AE4" Style="{StaticResource guidButton}"/>
+                <Button Style="{StaticResource guidButton}" Click="guidExample_Click">Example</Button>
             </StackPanel>
-        </StackPanel>
-    </Grid>
-    </Border>
+            <!-- Assign the second StackPanel to the second row -->
+            <StackPanel Grid.Row="1" Margin="50" Background="Transparent">
+                <TextBox  x:Name="InputTextBox"  TextChanged="InputTextBox_TextChanged"  Margin="5" Padding="5">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="CopyClipboard" Content="Clipboard" Margin="10" Background="#6A6AE4" Style="{StaticResource guidButton}" Click="CopyClipboard_Click"/>
+                    <Button x:Name="ClearButton" Content="Clear" Margin="10" Click="ClearButton_Click" Background="#6A6AE4" Style="{StaticResource guidButton}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
 </UserControl>
