@@ -120,6 +120,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\InverseBooleanConverter.cs" />
+    <Compile Include="Models\TimerItem.cs" />
     <Compile Include="Models\TimeZoneInfoModel.cs" />
     <Compile Include="Services\CreatioService.cs" />
     <Compile Include="Services\TimeZoneService.cs" />
@@ -193,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BigClock.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Timer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

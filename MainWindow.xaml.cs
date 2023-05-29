@@ -69,7 +69,7 @@ namespace FeatureHubPurple
         {
             MainContent.Children.Clear();
             MainContent.Children.Add(featureControl);
-            MainContent.VerticalAlignment = VerticalAlignment.Center;
+
         }
 
         // Method to set the active button style
@@ -118,6 +118,13 @@ namespace FeatureHubPurple
 
         }
 
+        private void WorkTimersButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveButton(WorkTimersButton);
+            LoadFeatureControl(new Feature3Control());
+            SetTitleContent("WorkTimers");
+        }
+
         #endregion
         // Method to restore the original content of MainContent
         private void RestoreMainContent()
@@ -126,7 +133,7 @@ namespace FeatureHubPurple
             if (_originalMainContent != null)
             {
                 // Remove vertical alignment
-                MainContent.VerticalAlignment = VerticalAlignment.Top;
+                MainContent.VerticalAlignment = VerticalAlignment.Stretch;
                 MainContent.Children.Add(_originalMainContent);
             }
         }
