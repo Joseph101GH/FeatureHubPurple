@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FeatureHubPurple"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:uc="clr-namespace:FeatureHubPurple.UserControls"
-        
+
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Background="Transparent" mc:Ignorable="d" Height="740" Width="1280">
     <Grid Name="all" Background="Transparent" >
@@ -47,54 +47,56 @@
                         </StackPanel>
                         <Separator Height="0.8" Background="#46558a" Margin="20 30 20 30"/>
                         <!--Menu Buttons-->
-                        <Button x:Name="DashboardButton" Style="{StaticResource menuButtonActive}" Click="DashboardButton_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="GuidCheckerButton" Click="GuidCheckerButton_Click" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="FileSignature" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Guid Checker" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="TimeZonesButton" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="EnvelopeOpenText" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Time Zones" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="WorkTimersButton" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="ShoppingCart" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Work Timers" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="HourConverterButton" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="ChartArea" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Hour Converter" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="HoursWorkedButton" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Coins" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Hours worked" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="Feature7Button" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="FlagCheckered" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Feature7" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="SettingsButton" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Cog" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Settings" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
+                        <StackPanel x:Name="SidebarButtonsPanel">
+                            <Button x:Name="DashboardButton" Style="{StaticResource menuButtonActive}" Click="DashboardButton_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="GuidCheckerButton" Click="GuidCheckerButton_Click" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="FileSignature" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Guid Checker" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="TimeZonesButton" Style="{StaticResource menuButton}" Click="TimeZonesButton_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="EnvelopeOpenText" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Time Zones" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="WorkTimersButton" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="ShoppingCart" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Work Timers" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="HourConverterButton" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="ChartArea" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Hour Converter" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="HoursWorkedButton" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Coins" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Hours worked" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="Feature7Button" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="FlagCheckered" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Feature7" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="SettingsButton" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Cog" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Settings" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom">
                         <Button x:Name="LogoutButton" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" Visibility="Hidden" >
@@ -129,7 +131,7 @@
                     <Border Grid.Column="1" CornerRadius="10" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                         <DockPanel Name="fullwidth" HorizontalAlignment="Stretch" Background="Transparent">
                             <TextBlock x:Name="pageTitle" Margin="25" FontSize="26" Foreground="#CCD7FF" VerticalAlignment="Center" Text="Good Afternoon"
-              DockPanel.Dock="Left" />
+                                       DockPanel.Dock="Left" />
                             <StackPanel Orientation="Horizontal" Background="Transparent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 25 0">
                                 <Button Style="{StaticResource windowButton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" VerticalAlignment="Bottom" Margin="0,0,10,30" Background="Transparent" BorderBrush="Transparent">
                                     <fa:IconImage  Icon="WindowMinimize" Style="{StaticResource menuButtonIconTitleWindow}"/>
@@ -148,22 +150,22 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Border Name="mainContentBorder" CornerRadius="20" Background="#022b3a" Margin="25 0 25 40">
-                            <StackPanel Name="MainContent">
-                            <Grid Background="Transparent" >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Button Margin="0 10 20 0" Grid.Row="0" HorizontalAlignment="Right" x:Name="refreshDashboardsButton" Height="50" Width="50" Background="Transparent" BorderBrush="Transparent" Click="refreshDashboardsButton_Click">
-                                    <fa:IconImage  Icon="Refresh" Foreground="White" />
-                                </Button>
-                                <!--Info Cards-->
-                                <StackPanel x:Name="smallDashboardPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="25 25 0 0">
-                                    <uc:InfoCard Grid.Column="0" Number="0h" Icon="Clock" Background1="#827BFF" Background2="#D9B5FF" EllipseBackground1="#B298FD" EllipseBackground2="#E4BBFF" Title="Total Hours Today" x:Name="TotalHoursTodayCard"/>
-                                    <uc:InfoCard Grid.Column="1" Number="0h" Icon="Clock" Background1="#FD8A87" Background2="#F3AB92" EllipseBackground1="#FBD5A8" EllipseBackground2="#FDB89B" Title="Total Hours This Week" />
-                                    <uc:InfoCard Grid.Column="2" Number="0h" Icon="Clock" Background1="#FC84CB" Background2="#FC8FAE" EllipseBackground1="#FC8FAE" EllipseBackground2="#FFABE6" Title="Total Hours This Month"/>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel Name="MainContent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid Background="Transparent" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Button Margin="0 10 20 0" Grid.Row="0" HorizontalAlignment="Right" x:Name="refreshDashboardsButton" Height="50" Width="50" Background="Transparent" BorderBrush="Transparent" Click="refreshDashboardsButton_Click">
+                                        <fa:IconImage  Icon="Refresh" Foreground="White" />
+                                    </Button>
+                                    <!--Info Cards-->
+                                    <StackPanel x:Name="smallDashboardPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="25 25 0 0">
+                                        <uc:InfoCard Grid.Column="0" Number="0h" Icon="Clock" Background1="#827BFF" Background2="#D9B5FF" EllipseBackground1="#B298FD" EllipseBackground2="#E4BBFF" Title="Total Hours Today" x:Name="TotalHoursTodayCard"/>
+                                        <uc:InfoCard Grid.Column="1" Number="0h" Icon="Clock" Background1="#FD8A87" Background2="#F3AB92" EllipseBackground1="#FBD5A8" EllipseBackground2="#FDB89B" Title="Total Hours This Week" />
+                                        <uc:InfoCard Grid.Column="2" Number="0h" Icon="Clock" Background1="#FC84CB" Background2="#FC8FAE" EllipseBackground1="#FC8FAE" EllipseBackground2="#FFABE6" Title="Total Hours This Month"/>
+                                    </StackPanel>
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </Grid>

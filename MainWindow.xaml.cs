@@ -54,14 +54,6 @@ namespace FeatureHubPurple
             this.Close();
         }
 
-        // Button click handlers for loading different features
-        private void GuidCheckerButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetActiveButton(GuidCheckerButton);
-            LoadFeatureControl(new Feature1Control());
-            SetTitleContent("GUID-Checker");
-        }
-
         private void Feature2Button_Click(object sender, RoutedEventArgs e)
         {
             LoadFeatureControl(new Feature2Control());
@@ -84,19 +76,25 @@ namespace FeatureHubPurple
         private void SetActiveButton(Button activeButton)
         {
             // Reset all button styles to "menuButton"
-            DashboardButton.Style = (Style)FindResource("menuButton");
-            GuidCheckerButton.Style = (Style)FindResource("menuButton");
+            foreach (var child in SidebarButtonsPanel.Children)
+            {
+                if (child is Button button)
+                {
+                    button.Style = (Style)FindResource("menuButton");
+                }
+            }
 
             // Set the clicked button's style to "menuButtonActive"
             activeButton.Style = (Style)FindResource("menuButtonActive");
         }
+
 
         // Method to set the title content
         private void SetTitleContent(string title)
         {
             pageTitle.Text = title;
         }
-
+        #region Sidebar buttons
         // Button click handler for returning to the Dashboard
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
@@ -104,6 +102,23 @@ namespace FeatureHubPurple
             SetActiveButton(DashboardButton);
         }
 
+        // Button click handlers for loading different features
+        private void GuidCheckerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveButton(GuidCheckerButton);
+            LoadFeatureControl(new Feature1Control());
+            SetTitleContent("GUID-Checker");
+        }
+
+        private void TimeZonesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveButton(TimeZonesButton);
+            LoadFeatureControl(new Feature2Control());
+            SetTitleContent("Timezones");
+
+        }
+
+        #endregion
         // Method to restore the original content of MainContent
         private void RestoreMainContent()
         {
@@ -150,5 +165,7 @@ namespace FeatureHubPurple
             TimeSpan totalTime = await _creatioService.GetTotalTimeForToday();
             TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
         }
+
+
     }
 }

@@ -120,7 +120,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\TimeZoneInfoModel.cs" />
     <Compile Include="Services\CreatioService.cs" />
+    <Compile Include="Services\TimeZoneService.cs" />
     <Compile Include="UserControls\Feature1Control.xaml.cs">
       <DependentUpon>Feature1Control.xaml</DependentUpon>
     </Compile>

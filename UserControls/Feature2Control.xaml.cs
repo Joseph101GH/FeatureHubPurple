@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using FeatureHubPurple.Services;
+using FeatureHubPurple.Models;
 
 namespace FeatureHubPurple.UserControls
 {
@@ -21,50 +12,63 @@ namespace FeatureHubPurple.UserControls
     /// </summary>
     public partial class Feature2Control : UserControl
     {
-        private readonly DispatcherTimer _timer;
-        private TimeZoneInfo _selectedTimeZone;
+        private readonly DispatcherTimer _updateTimer;
+        private TimeZoneInfo _currentSelectedTimeZone;
+        private readonly TimeZoneService _timeZoneService;
 
         public Feature2Control()
         {
             InitializeComponent();
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
 
-            _selectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time"); // Default timezone to Brussels
-            TimeZoneComboBox.SelectedIndex = 0; // No timezone selected by default
-            DisplayTime();
+            // Initialize the timer for updating the time display
+            _updateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _updateTimer.Tick += UpdateTimeDisplay;
+            _updateTimer.Start();
+
+            // Initialize the time zone service
+            _timeZoneService = new TimeZoneService();
+
+            // Populate the time zone list
+            var timeZoneModels = _timeZoneService.GetTimeZonesWithCurrentTimes();
+            foreach (var timeZoneModel in timeZoneModels)
+            {
+                TimeZoneList.Items.Add(timeZoneModel);
+            }
+
+            // Set the default time zone to Brussels
+            _currentSelectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+            TimeZoneComboBox.SelectedIndex = 0;
+
+            // Display the current time
+            UpdateTimeDisplay(null, null);
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            DisplayTime();
-        }
-
-        private void DisplayTime()
+        private void UpdateTimeDisplay(object sender, EventArgs e)
         {
             DateTime currentTime = DateTime.UtcNow;
-            if (_selectedTimeZone != null)
+            if (_currentSelectedTimeZone != null)
             {
-                currentTime = TimeZoneInfo.ConvertTimeFromUtc(currentTime, _selectedTimeZone);
+                currentTime = TimeZoneInfo.ConvertTimeFromUtc(currentTime, _currentSelectedTimeZone);
             }
             TimeDisplay.Text = currentTime.ToString("HH:mm:ss");
         }
 
         private void TimeZoneComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (TimeZoneComboBox.SelectedIndex == 0) // Brussels
+            switch (TimeZoneComboBox.SelectedIndex)
             {
-                _selectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time"); // Default timezone to Brussels
-            }
-            else if (TimeZoneComboBox.SelectedIndex == 1) // UTC
-            {
-                _selectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
-            }
-            else if (TimeZoneComboBox.SelectedIndex == 2) // CEST
-            {
-                _selectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+                case 0: // Brussels
+                    _currentSelectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+                    break;
+                case 1: // UTC
+                    _currentSelectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+                    break;
+                case 2: // CEST
+                    _currentSelectedTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
+                    break;
             }
         }
     }
