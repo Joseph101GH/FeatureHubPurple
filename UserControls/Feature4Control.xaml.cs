@@ -18,9 +18,7 @@ using System.ComponentModel;
 
 namespace FeatureHubPurple.UserControls
 {
-    /// <summary>
-    /// Interaction logic for Feature4Control.xaml
-    /// </summary>
+    //Test
     public partial class Feature4Control : UserControl
     {
         private ICollectionView _collectionView;
