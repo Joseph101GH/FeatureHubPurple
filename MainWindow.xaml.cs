@@ -18,11 +18,14 @@ namespace FeatureHubPurple
         // Original content of the MainContent control
         private UIElement _originalMainContent;
         private CreatioService _creatioService;
+        // Instance of Feature3Control
+        private Feature3Control _feature3Control;
 
         public MainWindow()
         {
             InitializeComponent();
             Instance = this;
+
             _creatioService = new CreatioService();
 
             // Save the original content of MainContent
@@ -61,6 +64,8 @@ namespace FeatureHubPurple
 
         private void Feature3Button_Click(object sender, RoutedEventArgs e)
         {
+            if (_feature3Control != null)
+                LoadFeatureControl(_feature3Control);
             LoadFeatureControl(new Feature3Control());
         }
 
@@ -121,8 +126,20 @@ namespace FeatureHubPurple
         private void WorkTimersButton_Click(object sender, RoutedEventArgs e)
         {
             SetActiveButton(WorkTimersButton);
-            LoadFeatureControl(new Feature3Control());
             SetTitleContent("WorkTimers");
+
+            if (_feature3Control != null)
+            {
+                LoadFeatureControl(_feature3Control);
+            }
+            else
+            {
+                // Initialize Feature3Control
+                _feature3Control = new Feature3Control();
+
+                LoadFeatureControl(_feature3Control);
+            }
+
         }
 
         private void HourConverterButton_Click(object sender, RoutedEventArgs e)

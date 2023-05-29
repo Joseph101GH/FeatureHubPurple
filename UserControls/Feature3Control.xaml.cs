@@ -124,13 +124,13 @@ namespace FeatureHubPurple.UserControls
             var listViewWidth = TimersListView.ActualWidth;
             var gridView = ((GridView)TimersListView.View);
 
-            gridView.Columns[0].Width = listViewWidth * 0.35; // 25% of the ListView width
-            gridView.Columns[1].Width = listViewWidth * 0.10; // 15% of the ListView width
-            gridView.Columns[2].Width = listViewWidth * 0.10; // 15% of the ListView width
-            gridView.Columns[3].Width = listViewWidth * 0.10; // 15% of the ListView width
-            gridView.Columns[4].Width = listViewWidth * 0.10; // 15% of the ListView width
-            gridView.Columns[5].Width = listViewWidth * 0.1;  // 10% of the ListView width
-            gridView.Columns[6].Width = listViewWidth * 0.1;  // 10% of the ListView width
+            gridView.Columns[0].Width = listViewWidth * 0.40; // desc
+            gridView.Columns[1].Width = listViewWidth * 0.10; // start
+            gridView.Columns[2].Width = listViewWidth * 0.10; // end
+            gridView.Columns[3].Width = listViewWidth * 0.10; // Duration
+            gridView.Columns[4].Width = listViewWidth * 0.10; // Total min
+            gridView.Columns[5].Width = listViewWidth * 0.1;  // Pause
+            gridView.Columns[6].Width = listViewWidth * 0.1;  // Stop
         }
 
 
@@ -143,7 +143,7 @@ namespace FeatureHubPurple.UserControls
                 DateTime endTime = DateTime.ParseExact(item.EndTime, "HH:mm", CultureInfo.InvariantCulture);
                 TimeSpan duration = endTime - startTime;
                 TimeSpan roundedDuration = RoundUpToNearest(duration, TimeSpan.FromMinutes(15));
-                item.Duration = $"{roundedDuration:h\\:mm}";
+                item.Duration = $"{roundedDuration:hh\\:mm}";
                 item.TotalMinutes = (int)roundedDuration.TotalMinutes;
             }
         }

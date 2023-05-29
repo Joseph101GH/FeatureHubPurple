@@ -20,14 +20,16 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="DescriptionTextBox"
+            <TextBox x:Name="DescriptionTextBox" Style="{StaticResource searchTextbox}"
                      Grid.Column="0" Margin="10" TextChanged="DescriptionTextBox_TextChanged" />
+            <!--<TextBox x:Name="DescriptionTextBox"
+            Grid.Column="0" Margin="10" TextChanged="DescriptionTextBox_TextChanged" />-->
             <Button x:Name="StartButton"
                     Grid.Column="1" Margin="10" Click="StartButton_Click" IsEnabled="False"
                     Style="{StaticResource actionButtons}">
                 <fa:IconImage Icon="PlayCircle" />
             </Button>
-            <TextBlock x:Name="TotalTimeTextBlock"  Grid.Column="2" Margin="10" Text="Total: 00:00" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="TotalTimeTextBlock" Foreground="#C2CFFF" Grid.Column="2" Margin="10" Text="Total: 00:00" HorizontalAlignment="Right"/>
         </Grid>
         <ListView x:Name="TimersListView" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SizeChanged="TimersListView_SizeChanged" av:ItemsSource="{av:SampleData ItemCount=5}">
             <ListView.Resources>
