@@ -16,22 +16,41 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
             <Grid.ColumnDefinitions>
+                <!--search-->
                 <ColumnDefinition Width="*"/>
+                <!--play-->
                 <ColumnDefinition Width="Auto"/>
+                <!--clear/save-->
+                <ColumnDefinition Width="Auto"/>
+                <!--timer-->
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="DescriptionTextBox" Style="{StaticResource searchTextbox}"
+                     KeyDown="DescriptionTextBox_KeyDown"
                      Grid.Column="0" Margin="10" TextChanged="DescriptionTextBox_TextChanged" />
             <!--<TextBox x:Name="DescriptionTextBox"
             Grid.Column="0" Margin="10" TextChanged="DescriptionTextBox_TextChanged" />-->
             <Button x:Name="StartButton"
-                    Grid.Column="1" Margin="10" Click="StartButton_Click" IsEnabled="False"
+                    Grid.Column="1" Margin="10" Click="StartButton_Click"
                     Style="{StaticResource actionButtons}">
-                <fa:IconImage Icon="PlayCircle" />
+                <fa:IconImage Icon="Play" Margin="4" />
             </Button>
-            <TextBlock x:Name="TotalTimeTextBlock" Foreground="#C2CFFF" Grid.Column="2" Margin="10" Text="Total: 00:00" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0 0 10 0">
+                <Button x:Name="saveTimersButton" Click="SaveTimersButton_Click"
+                        Style="{StaticResource actionButtons}"  Margin="10">
+                    <fa:IconImage Icon="Save" Margin="2.5" />
+                </Button>
+                <Button x:Name="clearTimersButton" Click="ClearTimersButton_Click"
+                        Style="{StaticResource actionButtons}">
+                    <fa:IconImage Icon="Trash" Margin="2.5" />
+                </Button>
+            </StackPanel>
+            <TextBlock x:Name="TotalTimeTextBlock" Margin="5 5 10 0" Foreground="#C2CFFF" Grid.Column="3"
+                       Text="Total: 00:00" VerticalAlignment="Center" FontWeight="Bold"/>
         </Grid>
-        <ListView x:Name="TimersListView" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SizeChanged="TimersListView_SizeChanged" av:ItemsSource="{av:SampleData ItemCount=5}">
+        <ListView x:Name="TimersListView" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch" SizeChanged="TimersListView_SizeChanged"
+                  av:ItemsSource="{av:SampleData ItemCount=5}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ContentPresenter}">
                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -49,6 +68,7 @@
                             <Setter Property="Padding" Value="0"/>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="Index" DisplayMemberBinding="{Binding Index}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Start Time">
                         <GridViewColumn.CellTemplate>
@@ -78,6 +98,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
                     <GridViewColumn Header="Pause">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -85,7 +106,7 @@
                                         IsEnabled="{Binding IsActive}"
                                         HorizontalAlignment="Center"
                                         Style="{StaticResource actionButtons}">
-                                    <fa:IconImage Icon="PauseCircle" />
+                                    <fa:IconImage Icon="Pause" Margin="4" />
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -93,11 +114,21 @@
                     <GridViewColumn Header="Stop">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="StopButton_Click" Tag="{Binding}"
+                                <Button x:Name="stopTimerButton" Click="StopButton_Click" Tag="{Binding}"
                                         IsEnabled="{Binding IsActive}"
-                                        HorizontalAlignment="Center"
-                                        Style="{StaticResource actionButtons}">
-                                    <fa:IconImage Icon="StopCircle" />
+                                        HorizontalAlignment="Center" Style="{StaticResource actionButtons}">
+                                    <fa:IconImage Icon="Stop" Margin="4" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Delete">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="deleteTimerButton" Click="DeleteTimerButton_Click" Tag="{Binding}"
+                                        IsEnabled="{Binding IsActive}"
+                                        HorizontalAlignment="Center" Style="{StaticResource actionButtons}">
+                                    <fa:IconImage Icon="Trash" Margin="4" />
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

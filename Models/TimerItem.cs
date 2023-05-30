@@ -12,6 +12,17 @@ namespace FeatureHubPurple.Models
 
     public class TimerItem : INotifyPropertyChanged
     {
+
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+
+        private int _index;
+        public int Index
+        {
+                get => _index;
+                set => SetProperty(ref _index, value);
+        }
+
         private string _description;
         public string Description
         {

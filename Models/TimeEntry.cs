@@ -8,6 +8,10 @@ namespace FeatureHubPurple.Models
 {
     public class TimeEntry
     {
+        public int Index
+        {
+            get; set;
+        }
         public string Time
         {
             get; set;
