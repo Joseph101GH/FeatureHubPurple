@@ -90,7 +90,7 @@
                                     <TextBlock Text="Feature7" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="SettingsButton" Style="{StaticResource menuButton}">
+                            <Button x:Name="SettingsButton" Style="{StaticResource menuButton}" Click="SettingsButton_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="Cog" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Settings" Style="{StaticResource menuButtonText}"/>
