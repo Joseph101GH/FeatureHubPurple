@@ -42,7 +42,7 @@
                             </Border>
                             <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
                                 <TextBlock Name="UserName" Text="User A." FontSize="15" Margin="0 0 0 5" Foreground="#C2CFFF"/>
-                                <TextBlock Text="Beta 3.0" Foreground="#7788bf" FontSize="11"/>
+                                <TextBlock Text="Alpha 3.0" Foreground="#7788bf" FontSize="11"/>
                             </StackPanel>
                         </StackPanel>
                         <Separator Height="0.8" Background="#46558a" Margin="20 30 20 30"/>

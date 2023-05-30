@@ -17,6 +17,6 @@
                  Background="Transparent" BorderThickness="0"
                  Style="{StaticResource titleTextBox}" TextWrapping="Wrap"
                  xml:space="preserve">
-        Version 0.3</TextBox>
+        Version Alpha 0.3</TextBox>
     </StackPanel>
 </UserControl>
