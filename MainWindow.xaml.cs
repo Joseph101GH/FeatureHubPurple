@@ -20,6 +20,11 @@ namespace FeatureHubPurple
         private CreatioService _creatioService;
         // Instance of Feature3Control
         private Feature3Control _feature3Control;
+        public bool IsSaved = true;
+        public void SetIsSaved(bool value)
+        {
+            IsSaved = value;
+        }
 
         public MainWindow()
         {
@@ -30,6 +35,18 @@ namespace FeatureHubPurple
 
             // Save the original content of MainContent
             _originalMainContent = MainContent.Children.Count > 0 ? MainContent.Children[0] : null;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!IsSaved) // You need to implement this property to track whether the data is saved
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to discard your changes?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
 
         // Handle mouse events for moving the window

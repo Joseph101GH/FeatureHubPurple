@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:FeatureHubPurple"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:uc="clr-namespace:FeatureHubPurple.UserControls"
-
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent" mc:Ignorable="d" Height="740" Width="1280">
+        Background="Transparent" mc:Ignorable="d" Height="740" Width="1280"
+        Closing="Window_Closing">
     <Grid Name="all" Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -149,8 +149,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Name="mainContentBorder" CornerRadius="20" 
-                                VerticalAlignment="Stretch" Background="#022b3a" 
+                        <Border Name="mainContentBorder" CornerRadius="20"
+                                VerticalAlignment="Stretch" Background="#022b3a"
                                 Margin="25 0 25 40">
                             <Grid Name="MainContent" Style="{StaticResource mainContentGrid}">
                                 <StackPanel Name="MainContentStack" VerticalAlignment="Stretch" Background="Transparent" HorizontalAlignment="Stretch">

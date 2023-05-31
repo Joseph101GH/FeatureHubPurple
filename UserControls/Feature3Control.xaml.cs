@@ -20,6 +20,7 @@ namespace FeatureHubPurple.UserControls
         private readonly DispatcherTimer _timer;
         // Index for the timer items
         private int _timerIndex;
+
         public Feature3Control()
         {
             InitializeComponent();
@@ -90,14 +91,14 @@ namespace FeatureHubPurple.UserControls
             var gridView = (GridView)TimersListView.View;
             // Set the width of each column
             gridView.Columns[0].Width = listViewWidth * 0.05; // Index
-            gridView.Columns[1].Width = listViewWidth * 0.40; // Description
+            gridView.Columns[1].Width = listViewWidth * 0.30; // Description
             gridView.Columns[2].Width = listViewWidth * 0.10; // Start time
             gridView.Columns[3].Width = listViewWidth * 0.10; // End time
             gridView.Columns[4].Width = listViewWidth * 0.10; // Duration
             gridView.Columns[5].Width = listViewWidth * 0.10; // Total minutes
-            gridView.Columns[6].Width = listViewWidth * 0.05; // Pause button
-            gridView.Columns[7].Width = listViewWidth * 0.05; // Stop button
-            gridView.Columns[8].Width = listViewWidth * 0.05; // Delete button
+            gridView.Columns[6].Width = listViewWidth * 0.08; // Pause button
+            gridView.Columns[7].Width = listViewWidth * 0.08; // Stop button
+            gridView.Columns[8].Width = listViewWidth * 0.08; // Delete button
         }
 
         // Method to update the end time and duration of a timer item
@@ -129,6 +130,9 @@ namespace FeatureHubPurple.UserControls
         {
             var json = JsonConvert.SerializeObject(_timerItems);
             File.WriteAllText("timers.json", json);
+
+            var mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.SetIsSaved(true);
         }
 
         // Method to load the timer entries from the JSON file
@@ -162,6 +166,8 @@ namespace FeatureHubPurple.UserControls
             _timerItems.Add(newItem);
             DescriptionTextBox.Clear();
             DescriptionTextBox.Focus(); // Set focus to the TextBox after the Start button is clicked
+            var mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.SetIsSaved(false);
         }
 
         // Event handler for the pause button click event
