@@ -68,8 +68,8 @@ namespace FeatureHubPurple.UserControls
             var listViewWidth = TimersListView.ActualWidth;
             var gridView = ((GridView)TimersListView.View);
 
-            gridView.Columns[0].Width = listViewWidth * 0.40; // 45% of the ListView width
-            gridView.Columns[1].Width = listViewWidth * 0.40; // 45% of the ListView width
+            gridView.Columns[0].Width = listViewWidth * 0.30; // 45% of the ListView width
+            gridView.Columns[1].Width = listViewWidth * 0.30; // 45% of the ListView width
             gridView.Columns[2].Width = listViewWidth * 0.2;  // 10% of the ListView width
         }
 
