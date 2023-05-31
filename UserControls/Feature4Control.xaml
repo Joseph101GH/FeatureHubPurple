@@ -35,25 +35,11 @@
                   HorizontalAlignment="Stretch"
                   HorizontalContentAlignment="Stretch"
                   SizeChanged="TimersListView_SizeChanged"
-                  av:ItemsSource="{av:SampleData ItemCount=33}">
-            <ListView.Resources>
-                <Style TargetType="{x:Type ContentPresenter}">
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                </Style>
-            </ListView.Resources>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
+                  av:ItemsSource="{av:SampleData ItemCount=33}"
+                  Style="{StaticResource ListViewStyle1}"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}">
             <ListView.View>
-                <GridView>
-                    <GridView.ColumnHeaderContainerStyle>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="Padding" Value="0"/>
-                        </Style>
-                    </GridView.ColumnHeaderContainerStyle>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
                     <!--<GridViewColumn Header="Start Time">
                     <GridViewColumn.CellTemplate>
                     <DataTemplate>
