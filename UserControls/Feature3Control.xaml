@@ -50,25 +50,17 @@
         </Grid>
         <ListView x:Name="TimersListView" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch"
                   HorizontalContentAlignment="Stretch" SizeChanged="TimersListView_SizeChanged"
-                  av:ItemsSource="{av:SampleData ItemCount=5}">
+                  av:ItemsSource="{av:SampleData ItemCount=5}"
+                  Style="{StaticResource ListViewStyle1}"
+                  ItemContainerStyle="{StaticResource ListViewItemStyle1}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ContentPresenter}">
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                 </Style>
             </ListView.Resources>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView>
-                    <GridView.ColumnHeaderContainerStyle>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="Padding" Value="0"/>
-                        </Style>
-                    </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn Header="Index" DisplayMemberBinding="{Binding Index}"/>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
+                    <GridViewColumn Header="Nr" DisplayMemberBinding="{Binding Index}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Start Time">
                         <GridViewColumn.CellTemplate>
@@ -91,14 +83,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total Minutes">
+                    <GridViewColumn Header="Total Min">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding TotalMinutes}" HorizontalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                     <GridViewColumn Header="Pause">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

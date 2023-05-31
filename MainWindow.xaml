@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:FeatureHubPurple"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:uc="clr-namespace:FeatureHubPurple.UserControls"
-
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent" mc:Ignorable="d" Height="700" Width="1240">
+        Background="Transparent" mc:Ignorable="d" Height="740" Width="1280"
+        Closing="Window_Closing">
     <Grid Name="all" Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
