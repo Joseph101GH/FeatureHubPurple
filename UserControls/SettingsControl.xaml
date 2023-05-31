@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FeatureHubPurple.UserControls.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FeatureHubPurple.UserControls"
+             Background="Transparent"
+             mc:Ignorable="d" >
+    <!-- Assign the first StackPanel to the first row -->
+    <StackPanel Grid.Row="0" Orientation="Vertical" >
+        <TextBox Margin="50 0 50 10" Name="settingsText" IsReadOnly="True"
+                 Background="Transparent" BorderThickness="0"
+                 Style="{StaticResource titleTextBox}" TextWrapping="Wrap"
+                 xml:space="preserve">
+        This is the settings page. The app is still a work in progress.</TextBox>
+        <TextBox Margin="50 0 50 10" Name="versionText" IsReadOnly="True"
+                 Background="Transparent" BorderThickness="0"
+                 Style="{StaticResource titleTextBox}" TextWrapping="Wrap"
+                 xml:space="preserve">
+        Version Alpha 0.3</TextBox>
+    </StackPanel>
+</UserControl>

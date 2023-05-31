@@ -165,6 +165,13 @@ namespace FeatureHubPurple
             LoadFeatureControl(new Feature4Control());
             SetTitleContent("Hours converter");
         }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetActiveButton(SettingsButton);
+            LoadFeatureControl(new SettingsControl());
+            SetTitleContent("Settings");
+        }
         #endregion
 
 
@@ -214,6 +221,7 @@ namespace FeatureHubPurple
             TimeSpan totalTime = await _creatioService.GetTotalTimeForToday();
             TotalHoursTodayCard.Number = $"{totalTime.TotalHours}h";
         }
+
 
     }
 }
