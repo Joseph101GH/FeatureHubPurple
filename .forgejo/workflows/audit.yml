@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Install deps
         run: apk add --no-cache git nodejs wget
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install osv-scanner
         run: |
           wget -qO /usr/local/bin/osv-scanner https://github.com/google/osv-scanner/releases/latest/download/osv-scanner_linux_amd64
